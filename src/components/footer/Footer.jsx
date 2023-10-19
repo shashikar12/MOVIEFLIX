@@ -22,11 +22,13 @@ const Footer = () => {
           <li className="menuItem">FAQ</li>
         </ul>
         <div className="infoText">
-          Movix is your ultimate destination for all things movies. Our mission
+          Movieflix is your ultimate destination for all things movies. Our mission
           is to provide a seamless and immersive movie-watching experience for
           film enthusiasts of all ages. With a vast library of films spanning
           various genres, we strive to cater to diverse tastes and preferences,
           ensuring that there's something for everyone.
+          <br></br>
+          <p>&copy; Made by Shashikar Saurabh</p>
         </div>
         <div className="socialIcons">
           <span className="icon">
