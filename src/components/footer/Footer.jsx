@@ -27,7 +27,7 @@ const Footer = () => {
           film enthusiasts of all ages. With a vast library of films spanning
           various genres, we strive to cater to diverse tastes and preferences,
           ensuring that there's something for everyone.
-          <br></br>
+          
           <p>&copy; Made by Shashikar Saurabh</p>
         </div>
         <div className="socialIcons">
