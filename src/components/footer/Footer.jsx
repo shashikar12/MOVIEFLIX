@@ -28,7 +28,7 @@ const Footer = () => {
           various genres, we strive to cater to diverse tastes and preferences,
           ensuring that there's something for everyone.
           
-          <p>&copy; Made by Shashikar Saurabh</p>
+          <p>&copy; Made by Reyansh</p>
         </div>
         <div className="socialIcons">
           <span className="icon">
