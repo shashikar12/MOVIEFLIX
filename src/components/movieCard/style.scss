@@ -4,6 +4,7 @@
   margin-bottom: 25px;
   cursor: pointer;
   flex-shrink: 0;
+  outline: 0;
   @include md {
     width: calc(25% - 15px);
   }
@@ -79,7 +80,13 @@
   }
   &:hover {
     .posterBlock {
-      opacity: 0.5;
+      filter: brightness(0.72);
+    }
+  }
+  &:focus-visible {
+    .posterBlock {
+      outline: 3px solid var(--orange);
+      outline-offset: 4px;
     }
   }
 }

@@ -50,35 +50,53 @@ const Carousel = ({ data, loading, endpoint, title }) => {
     <div className="carousel">
       <ContentWrapper>
         {title && <div className="carouselTitle">{title}</div>}
-        <BsFillArrowLeftCircleFill
+        <button
           className="carouselLeftNav arrow"
+          type="button"
+          aria-label={`Scroll ${title || "carousel"} left`}
           onClick={() => navigation("left")}
-        />
-        <BsFillArrowRightCircleFill
+        >
+          <BsFillArrowLeftCircleFill />
+        </button>
+        <button
           className="carouselRighttNav arrow"
+          type="button"
+          aria-label={`Scroll ${title || "carousel"} right`}
           onClick={() => navigation("right")}
-        />
+        >
+          <BsFillArrowRightCircleFill />
+        </button>
         {!loading ? (
           <div className="carouselItems" ref={carouselContainer}>
             {data?.map((item) => {
+              const itemTitle = item.title || item.name;
               const posterUrl = item.poster_path
                 ? url.poster + item.poster_path
                 : PosterFallback;
+              const openItem = () =>
+                navigate(`/${item.media_type || endpoint}/${item.id}`);
               return (
                 <div
                   key={item.id}
+                  role="button"
+                  tabIndex="0"
                   className="carouselItem"
-                  onClick={() =>
-                    navigate(`/${item.media_type || endpoint}/${item.id}`)
-                  }
+                  aria-label={`Open details for ${itemTitle}`}
+                  onClick={openItem}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                      event.preventDefault();
+                      openItem();
+                    }
+                  }}
                 >
                   <div className="posterBlock">
-                    <Img src={posterUrl} />
-                    <CircleRating rating={item.vote_average.toFixed(1)} />
-                    <Genres data={item.genre_ids.slice(0, 2)} />
+                    <Img src={posterUrl} alt={`${itemTitle} poster`} />
+                    <CircleRating rating={(item.vote_average || 0).toFixed(1)} />
+                    <Genres data={(item.genre_ids || []).slice(0, 2)} />
                   </div>
                   <div className="textBlock">
-                    <span className="title">{item.title || item.name}</span>
+                    <span className="title">{itemTitle}</span>
                     <span className="date">
                       {dayjs(item.release_date || item.first_air_date).format(
                         "MMM D, YYYY"

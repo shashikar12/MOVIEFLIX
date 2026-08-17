@@ -7,7 +7,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import "./style.scss";
 
 import ContentWrapper from "../contentWrapper/ContentWrapper";
-import logo from "../../assets/movix-logo.svg";
 
 const Header = () => {
   const [show, setShow] = useState("top");
@@ -42,12 +41,14 @@ const Header = () => {
     };
   }, [lastScrollY]);
 
-  const searchQueryHandler = (event) => {
-    if (event.key === "Enter" && query.length > 0) {
-      navigate(`/search/${query}`);
-      setTimeout(() => {
-        setShowSearch(false);
-      }, 1000);
+  const submitSearch = (event) => {
+    event.preventDefault();
+    const trimmedQuery = query.trim();
+
+    if (trimmedQuery.length > 0) {
+      navigate(`/search/${trimmedQuery}`);
+      setShowSearch(false);
+      setQuery("");
     }
   };
 
@@ -73,42 +74,84 @@ const Header = () => {
   return (
     <header className={`header ${mobileMenu ? "mobileView" : ""} ${show}`}>
       <ContentWrapper>
-        <div className="logo" onClick={() => navigate("/")}>
-          <img src={logo} alt="" />
-        </div>
+        <button className="logo" type="button" onClick={() => navigate("/")}>
+          <span className="mark">play</span>
+          <span className="wordmark">movieflx</span>
+        </button>
         <ul className="menuItems">
-          <li className="menuItem" onClick={() => navigationHandler("movie")}>
-            Movies
+          <li>
+            <button
+              className="menuItem"
+              type="button"
+              onClick={() => navigationHandler("movie")}
+            >
+              Movies
+            </button>
           </li>
-          <li className="menuItem" onClick={() => navigationHandler("tv")}>
-            TV Shows
+          <li>
+            <button
+              className="menuItem"
+              type="button"
+              onClick={() => navigationHandler("tv")}
+            >
+              TV Shows
+            </button>
           </li>
-          <li className="menuItem">
-            <HiOutlineSearch onClick={openSearch} />
+          <li>
+            <button
+              className="menuItem iconButton"
+              type="button"
+              aria-label="Open search"
+              onClick={openSearch}
+            >
+              <HiOutlineSearch />
+            </button>
           </li>
         </ul>
 
         <div className="mobileMenuItems">
-          <HiOutlineSearch onClick={openSearch} />
+          <button type="button" aria-label="Open search" onClick={openSearch}>
+            <HiOutlineSearch />
+          </button>
           {mobileMenu ? (
-            <VscChromeClose onClick={() => setMobileMenu(false)} />
+            <button
+              type="button"
+              aria-label="Close navigation menu"
+              onClick={() => setMobileMenu(false)}
+            >
+              <VscChromeClose />
+            </button>
           ) : (
-            <SlMenu onClick={openMobileMenu} />
+            <button
+              type="button"
+              aria-label="Open navigation menu"
+              onClick={openMobileMenu}
+            >
+              <SlMenu />
+            </button>
           )}
         </div>
       </ContentWrapper>
       {showSearch && (
         <div className="searchBar">
           <ContentWrapper>
-            <div className="searchInput">
+            <form className="searchInput" onSubmit={submitSearch}>
               <input
                 type="text"
-                placeholder="Search for a movie or tv show...."
+                placeholder="Search movies, shows, artists"
+                aria-label="Search movies, shows, artists"
+                value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                onKeyUp={searchQueryHandler}
+                autoFocus
               />
-              <VscChromeClose onClick={() => setShowSearch(false)} />
-            </div>
+              <button
+                type="button"
+                aria-label="Close search"
+                onClick={() => setShowSearch(false)}
+              >
+                <VscChromeClose />
+              </button>
+            </form>
           </ContentWrapper>
         </div>
       )}

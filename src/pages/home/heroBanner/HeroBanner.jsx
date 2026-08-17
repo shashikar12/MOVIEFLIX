@@ -16,15 +16,20 @@ const HeroBanner = () => {
   const { data, loading } = useFetch("/movie/upcoming");
 
   useEffect(() => {
+    if (!url.backdrop || !data?.results?.length) return;
     const bg =
       url.backdrop +
-      data?.results?.[Math.floor(Math.random() * 20)]?.backdrop_path;
+      data.results[Math.floor(Math.random() * data.results.length)]
+        ?.backdrop_path;
     setBackground(bg);
-  }, [data]);
+  }, [data, url.backdrop]);
 
   const searchQueryHandler = (event) => {
-    if (event.key === "Enter" && query.length > 0) {
-      navigate(`/search/${query}`);
+    event.preventDefault();
+    const trimmedQuery = query.trim();
+
+    if (trimmedQuery.length > 0) {
+      navigate(`/search/${trimmedQuery}`);
     }
   };
 
@@ -39,19 +44,22 @@ const HeroBanner = () => {
       <div className="opacity-layer"></div>
       <ContentWrapper>
         <div className="heroBannerContent">
-          <span className="title">Welcome.</span>
+          <span className="eyebrow">Built for binge discovery</span>
+          <h1 className="title">movieflx</h1>
           <span className="subTitle">
-            Millions of movies, TV shows and people to discover. Explore now.
+            A fast, responsive OTT experience for movies, shows, trailers, and
+            personalized discovery.
           </span>
-          <div className="searchInput">
+          <form className="searchInput" onSubmit={searchQueryHandler}>
             <input
               type="text"
-              placeholder="Search for a movie or tv show...."
+              placeholder="Search for a movie, show, or artist"
+              aria-label="Search for a movie, show, or artist"
+              value={query}
               onChange={(e) => setQuery(e.target.value)}
-              onKeyUp={searchQueryHandler}
             />
-            <button>Search</button>
-          </div>
+            <button type="submit">Search</button>
+          </form>
         </div>
       </ContentWrapper>
     </div>

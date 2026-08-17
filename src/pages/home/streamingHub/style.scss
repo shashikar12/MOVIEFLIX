@@ -1,0 +1,216 @@
+@import "../../../mixins.scss";
+
+.streamingHub {
+  background: #030914;
+  padding: 0 0 54px;
+  .hubHeader {
+    align-items: flex-end;
+    display: flex;
+    gap: 18px;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    .sectionKicker {
+      color: var(--orange);
+      display: block;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    h2 {
+      color: white;
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    button {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 999px;
+      color: white;
+      cursor: pointer;
+      font-weight: 700;
+      min-width: 132px;
+      padding: 12px 16px;
+    }
+  }
+  .hubGrid {
+    display: grid;
+    gap: 14px;
+    @include md {
+      grid-template-columns: 1.4fr 0.8fr;
+    }
+  }
+  .featurePanel,
+  .experiencePanel,
+  .queuePanel {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+  }
+  .featurePanel {
+    display: grid;
+    gap: 18px;
+    overflow: hidden;
+    padding: 16px;
+    @include md {
+      grid-row: span 2;
+      grid-template-columns: 220px 1fr;
+      min-height: 360px;
+      padding: 24px;
+    }
+    .posterStack {
+      display: flex;
+      min-height: 190px;
+      position: relative;
+      .lazy-load-image-background,
+      .posterGhost {
+        aspect-ratio: 2 / 3;
+        border-radius: 8px;
+        box-shadow: 0 24px 45px rgba(0, 0, 0, 0.35);
+        height: 190px;
+        overflow: hidden;
+        position: absolute;
+        transform: rotate(-7deg);
+        width: 126px;
+        &:nth-child(2) {
+          left: 54px;
+          top: 12px;
+          transform: rotate(2deg);
+        }
+        &:nth-child(3) {
+          left: 106px;
+          top: 24px;
+          transform: rotate(8deg);
+        }
+        img {
+          height: 100%;
+          object-fit: cover;
+          width: 100%;
+        }
+      }
+    }
+    .featureCopy {
+      align-self: center;
+      color: white;
+      span {
+        color: rgba(255, 255, 255, 0.62);
+        display: block;
+        font-size: 13px;
+        margin-bottom: 10px;
+      }
+      h3 {
+        font-size: 28px;
+        line-height: 1.15;
+        margin-bottom: 12px;
+      }
+      p {
+        color: rgba(255, 255, 255, 0.72);
+        font-size: 15px;
+        line-height: 1.55;
+        margin-bottom: 18px;
+      }
+      button {
+        background: var(--gradient);
+        border: 0;
+        border-radius: 999px;
+        color: white;
+        cursor: pointer;
+        font-weight: 800;
+        padding: 12px 18px;
+      }
+    }
+  }
+  .experiencePanel {
+    display: grid;
+    gap: 10px;
+    padding: 14px;
+    .signalCard {
+      align-items: center;
+      background: rgba(255, 255, 255, 0.07);
+      border-radius: 8px;
+      color: white;
+      display: grid;
+      gap: 6px;
+      grid-template-columns: 34px 1fr auto;
+      min-height: 58px;
+      padding: 12px;
+      svg {
+        color: var(--orange);
+        font-size: 22px;
+      }
+      span {
+        color: rgba(255, 255, 255, 0.72);
+        font-size: 13px;
+      }
+      strong {
+        font-size: 16px;
+      }
+    }
+  }
+  .queuePanel {
+    color: white;
+    padding: 14px;
+    .queueHeader {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      span {
+        font-weight: 800;
+      }
+      small {
+        color: rgba(255, 255, 255, 0.55);
+      }
+    }
+    .queueList {
+      display: grid;
+      gap: 10px;
+    }
+    .queueItem {
+      align-items: center;
+      background: rgba(255, 255, 255, 0.07);
+      border: 0;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      display: grid;
+      gap: 12px;
+      grid-template-columns: 42px 1fr;
+      min-height: 62px;
+      padding: 8px;
+      text-align: left;
+      .lazy-load-image-background {
+        aspect-ratio: 2 / 3;
+        border-radius: 6px;
+        overflow: hidden;
+        width: 42px;
+        img {
+          height: 100%;
+          object-fit: cover;
+          width: 100%;
+        }
+      }
+      span {
+        min-width: 0;
+      }
+      strong {
+        display: block;
+        font-size: 14px;
+        line-height: 1.25;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      small {
+        color: rgba(255, 255, 255, 0.55);
+        display: block;
+        margin-top: 5px;
+      }
+    }
+    .queueGhost {
+      border-radius: 8px;
+      height: 62px;
+    }
+  }
+}

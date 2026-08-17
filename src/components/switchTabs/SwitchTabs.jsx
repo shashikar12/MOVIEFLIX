@@ -18,13 +18,15 @@ const SwitchTabs = ({ data, onTabChange }) => {
     <div className="switchingTabs">
       <div className="tabItems">
         {data.map((tab, index) => (
-          <span
+          <button
             key={index}
+            type="button"
             className={`tabItem ${selectedTab === index ? "active" : ""}`}
+            aria-pressed={selectedTab === index}
             onClick={() => activeTab(tab, index)}
           >
             {tab}
-          </span>
+          </button>
         ))}
         <span className="movingBg" style={{ left }} />
       </div>

@@ -7,15 +7,18 @@ const headers = {
   Authorization: "bearer " + TMDB_TOKEN,
 };
 
-export const fetchDataFromApi = async (url, params) => {
+export const fetchDataFromApi = async (url, params = {}, signal) => {
   try {
     const { data } = await axios.get(BASE_URL + url, {
       headers,
       params,
+      signal,
     });
     return data;
   } catch (err) {
-    console.log(err);
-    return err;
+    if (axios.isCancel(err) || err.name === "CanceledError") {
+      return null;
+    }
+    throw err;
   }
 };

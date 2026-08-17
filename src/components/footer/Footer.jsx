@@ -15,32 +15,29 @@ const Footer = () => {
     <footer className="footer">
       <ContentWrapper>
         <ul className="menuItems">
-          <li className="menuItem">Terms Of Use</li>
-          <li className="menuItem">Privacy-Policy</li>
+          <li className="menuItem">Terms</li>
+          <li className="menuItem">Privacy</li>
           <li className="menuItem">About</li>
-          <li className="menuItem">Blog</li>
-          <li className="menuItem">FAQ</li>
+          <li className="menuItem">Engineering</li>
+          <li className="menuItem">Status</li>
         </ul>
         <div className="infoText">
-          Movieflix is your ultimate destination for all things movies. Our mission
-          is to provide a seamless and immersive movie-watching experience for
-          film enthusiasts of all ages. With a vast library of films spanning
-          various genres, we strive to cater to diverse tastes and preferences,
-          ensuring that there's something for everyone.
-          
-          <p>&copy; Made by Shashikar Saurabh</p>
+          movieflx is a React OTT discovery experience focused on fast search,
+          responsive content rails, keyboard-friendly navigation, and clean API
+          integration.
+          <p>&copy; 2026 Shashikar Saurabh</p>
         </div>
         <div className="socialIcons">
-          <span className="icon">
+          <span className="icon" aria-label="Facebook">
             <FaFacebookF />
           </span>
-          <span className="icon">
+          <span className="icon" aria-label="Instagram">
             <FaInstagram />
           </span>
-          <span className="icon">
+          <span className="icon" aria-label="Twitter">
             <FaTwitter />
           </span>
-          <span className="icon">
+          <span className="icon" aria-label="LinkedIn">
             <FaLinkedin />
           </span>
         </div>
