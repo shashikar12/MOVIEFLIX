@@ -5,12 +5,16 @@ const TMDB_TOKEN = import.meta.env.VITE_APP_TMDB_TOKEN;
 
 export const fetchDataFromApi = async (url, params = {}, signal) => {
   const isProduction = import.meta.env.PROD;
-  const requestUrl = isProduction ? "/api/tmdb" : BASE_URL + url;
+  const query = new URLSearchParams(params).toString();
+  const endpoint = url.replace(/^\//, "");
+  const endpointWithQuery = query
+    ? `${endpoint}${endpoint.includes("?") ? "&" : "?"}${query}`
+    : endpoint;
+  const requestUrl = isProduction
+    ? `/api/tmdb/${encodeURIComponent(endpointWithQuery)}`
+    : BASE_URL + url;
   const headers = isProduction
-    ? {
-        "x-tmdb-endpoint": url.replace(/^\//, ""),
-        "x-tmdb-params": JSON.stringify(params),
-      }
+    ? {}
     : {
         Authorization: "bearer " + TMDB_TOKEN,
       };
