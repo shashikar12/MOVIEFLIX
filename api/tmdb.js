@@ -6,7 +6,12 @@ export default async function handler(request, response) {
     request.url,
     `https://${request.headers.host || "movieflix.local"}`
   );
-  const endpoint = requestUrl.searchParams.get("endpoint");
+  const body =
+    typeof request.body === "string"
+      ? JSON.parse(request.body || "{}")
+      : request.body || {};
+  const endpoint = body.endpoint || requestUrl.searchParams.get("endpoint");
+  const params = body.params || {};
 
   if (!token) {
     return response.status(500).json({ message: "TMDB token is not configured" });
@@ -23,10 +28,16 @@ export default async function handler(request, response) {
     : `/${endpoint}`;
   const tmdbUrl = new URL(normalizedEndpoint, TMDB_BASE_URL);
 
-  requestUrl.searchParams.forEach((value, key) => {
-    if (key !== "endpoint") {
-      tmdbUrl.searchParams.append(key, value);
+  Object.entries(params).forEach(([key, value]) => {
+    if (Array.isArray(value)) {
+      value.forEach((item) => tmdbUrl.searchParams.append(key, item));
+    } else if (value !== undefined && value !== null) {
+      tmdbUrl.searchParams.set(key, value);
     }
+  });
+
+  requestUrl.searchParams.forEach((value, key) => {
+    if (key !== "endpoint") tmdbUrl.searchParams.append(key, value);
   });
 
   try {
