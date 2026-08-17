@@ -32,7 +32,11 @@ Create a `.env` file with:
 
 ```bash
 VITE_APP_TMDB_TOKEN=your_tmdb_read_access_token
+TMDB_TOKEN=your_tmdb_read_access_token
 ```
+
+Production deployments use the `/api/tmdb` Vercel function so the app calls
+TMDB through the same origin instead of relying on browser-to-TMDB requests.
 
 ## Data Flow Diagram
 
