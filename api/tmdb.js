@@ -29,10 +29,8 @@ export default async function handler(request, response) {
       .json({ message: "A valid TMDB endpoint is required" });
   }
 
-  const normalizedEndpoint = endpoint.startsWith("/")
-    ? endpoint
-    : `/${endpoint}`;
-  const tmdbUrl = new URL(normalizedEndpoint, TMDB_BASE_URL);
+  const normalizedEndpoint = endpoint.replace(/^\//, "");
+  const tmdbUrl = new URL(normalizedEndpoint, `${TMDB_BASE_URL}/`);
 
   Object.entries(params).forEach(([key, value]) => {
     if (Array.isArray(value)) {
