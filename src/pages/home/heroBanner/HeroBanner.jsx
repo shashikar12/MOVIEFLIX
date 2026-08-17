@@ -45,7 +45,7 @@ const HeroBanner = () => {
       <ContentWrapper>
         <div className="heroBannerContent">
           <span className="eyebrow">Built for binge discovery</span>
-          <h1 className="title">movieflx</h1>
+          <h1 className="title">movieflix</h1>
           <span className="subTitle">
             A fast, responsive OTT experience for movies, shows, trailers, and
             personalized discovery.

@@ -76,7 +76,7 @@ const Header = () => {
       <ContentWrapper>
         <button className="logo" type="button" onClick={() => navigate("/")}>
           <span className="mark">play</span>
-          <span className="wordmark">movieflx</span>
+          <span className="wordmark">movieflix</span>
         </button>
         <ul className="menuItems">
           <li>

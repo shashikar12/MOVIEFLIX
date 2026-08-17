@@ -22,7 +22,7 @@ const Footer = () => {
           <li className="menuItem">Status</li>
         </ul>
         <div className="infoText">
-          movieflx is a React OTT discovery experience focused on fast search,
+          movieflix is a React OTT discovery experience focused on fast search,
           responsive content rails, keyboard-friendly navigation, and clean API
           integration.
           <p>&copy; 2026 Shashikar Saurabh</p>

@@ -1,10 +1,10 @@
-# movieflx
+# movieflix
 
-movieflx is a React + Vite OTT discovery app built around the full viewer journey: first launch, search, content rails, detail pages, trailers, recommendations, and responsive exploration for movies and TV shows.
+movieflix is a React + Vite OTT discovery app built around the full viewer journey: first launch, search, content rails, detail pages, trailers, recommendations, and responsive exploration for movies and TV shows.
 
 ## 2026 Upgrade Highlights
 
-- Rebranded the project from Movix/Movieflix to `movieflx`.
+- Standardized the whole project brand as `movieflix`.
 - Added a home-page viewer experience hub with a featured weekly trend, continue-watching style queue, and product health signals.
 - Improved search UX with real form submission, trimmed queries, autofocus, and mobile search controls.
 - Added keyboard accessibility to navigation tabs, content cards, carousel arrows, and poster interactions.
