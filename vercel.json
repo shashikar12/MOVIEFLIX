@@ -5,7 +5,7 @@
   "framework": "vite",
   "routes": [
     {
-      "src": "/api/tmdb",
+      "src": "/api/tmdb(.*)",
       "dest": "/api/tmdb.js"
     },
     {
