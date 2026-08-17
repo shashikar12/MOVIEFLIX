@@ -2,17 +2,19 @@ const TMDB_BASE_URL = "https://api.themoviedb.org/3";
 
 export default async function handler(request, response) {
   const token = process.env.TMDB_TOKEN || process.env.VITE_APP_TMDB_TOKEN;
-  const { path, ...query } = request.query;
+  const { endpoint, ...query } = request.query;
 
   if (!token) {
     return response.status(500).json({ message: "TMDB token is not configured" });
   }
 
-  if (!path || Array.isArray(path) || !path.startsWith("/")) {
-    return response.status(400).json({ message: "A valid TMDB path is required" });
+  if (!endpoint || Array.isArray(endpoint) || !endpoint.startsWith("/")) {
+    return response
+      .status(400)
+      .json({ message: "A valid TMDB endpoint is required" });
   }
 
-  const tmdbUrl = new URL(path, TMDB_BASE_URL);
+  const tmdbUrl = new URL(endpoint, TMDB_BASE_URL);
 
   Object.entries(query).forEach(([key, value]) => {
     if (Array.isArray(value)) {
