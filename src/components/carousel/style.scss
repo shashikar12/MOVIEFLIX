@@ -1,4 +1,4 @@
-@import "../../mixins.scss";
+@use "../../mixins.scss" as *;
 .carousel {
   margin-bottom: 50px;
   .contentWrapper {
