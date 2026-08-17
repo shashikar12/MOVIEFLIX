@@ -10,8 +10,14 @@ export default async function handler(request, response) {
     typeof request.body === "string"
       ? JSON.parse(request.body || "{}")
       : request.body || {};
-  const endpoint = body.endpoint || requestUrl.searchParams.get("endpoint");
-  const params = body.params || {};
+  const headerParams = request.headers["x-tmdb-params"];
+  const endpoint =
+    request.headers["x-tmdb-endpoint"] ||
+    body.endpoint ||
+    requestUrl.searchParams.get("endpoint");
+  const params =
+    body.params ||
+    (headerParams ? JSON.parse(headerParams) : {});
 
   if (!token) {
     return response.status(500).json({ message: "TMDB token is not configured" });

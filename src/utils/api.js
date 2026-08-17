@@ -7,24 +7,21 @@ export const fetchDataFromApi = async (url, params = {}, signal) => {
   const isProduction = import.meta.env.PROD;
   const requestUrl = isProduction ? "/api/tmdb" : BASE_URL + url;
   const headers = isProduction
-    ? {}
+    ? {
+        "x-tmdb-endpoint": url.replace(/^\//, ""),
+        "x-tmdb-params": JSON.stringify(params),
+      }
     : {
         Authorization: "bearer " + TMDB_TOKEN,
       };
 
   try {
-    const { data } = isProduction
-      ? await axios.post(
-          requestUrl,
-          { endpoint: url.replace(/^\//, ""), params },
-          { signal, timeout: 12000 }
-        )
-      : await axios.get(requestUrl, {
-          headers,
-          params,
-          signal,
-          timeout: 12000,
-        });
+    const { data } = await axios.get(requestUrl, {
+      headers,
+      params: isProduction ? {} : params,
+      signal,
+      timeout: 12000,
+    });
     return data;
   } catch (err) {
     if (axios.isCancel(err) || err.name === "CanceledError") {
