@@ -6,7 +6,9 @@ const TMDB_TOKEN = import.meta.env.VITE_APP_TMDB_TOKEN;
 export const fetchDataFromApi = async (url, params = {}, signal) => {
   const isProduction = import.meta.env.PROD;
   const requestUrl = isProduction ? "/api/tmdb" : BASE_URL + url;
-  const requestParams = isProduction ? { endpoint: url, ...params } : params;
+  const requestParams = isProduction
+    ? { endpoint: url.replace(/^\//, ""), ...params }
+    : params;
   const headers = isProduction
     ? {}
     : {
